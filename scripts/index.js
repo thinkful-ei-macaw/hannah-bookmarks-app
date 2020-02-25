@@ -1,5 +1,5 @@
-import store '.store.js';
-import '.api.js';
+import store from './store.js';
+import api from './api.js';
 
 
 // TEMPLATE GENERATION FUNCTIONS
@@ -66,10 +66,19 @@ function generateExpandedView(){
 // TEMPLATE RENDERING FUNCTIONS
 
 function render(){
-  let html='';
+  let bookmarks = [...store.bookmarks];
   if (store.adding === false){
     $('main').html(generateInitialView());
+    return;
+  }
+  else if (bookmarks.expanded === true){
+    $('main').html(generateExpandedView());
+  }
+  else {
+    $('main').html(generateAddView());
   }
 }
 
-render();
+$(render());
+
+// $(function(){ handleFormSubmission(); handleButtonClick(); render(); })

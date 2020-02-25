@@ -25,20 +25,20 @@ const store = {
 
 function findById(id){
   return this.bookmarks.find(currentItem => currentItem.id === id);
-};
+}
 
 function addBookmark(entry){
   this.bookmarks.push(entry);
-};
+}
 
 function deleteBookmark(id){
   this.bookmarks = this.bookmarks.filter(currentItem => currentItem.id !== id);
-};
+}
 
 export default {
   store,
-  bookmarks,
+  bookmarks:store.bookmarks,
   findById,
   addBookmark,
   deleteBookmark,
-}
+};
