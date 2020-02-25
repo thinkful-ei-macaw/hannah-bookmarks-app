@@ -1,10 +1,10 @@
-'use strict';
-import store from './store.js';
-const store = STORE.store
+import store '.store.js';
+import '.api.js';
+
 
 // TEMPLATE GENERATION FUNCTIONS
 
-const function generateInitialView(){
+function generateInitialView(){
   return `<div class="buttons">
   <button type="button" class="new-bookmark">New</button>
   <div class="dropdown">
@@ -22,9 +22,9 @@ const function generateInitialView(){
       <button type="button" class="collapsible">Title</button>
     </ul>
   </fieldset>`;
-};
+}
 
-const function generateAddView(){
+function generateAddView(){
   `<form>
       <label for="add-bookmark">Add New Bookmark</label>
       <input type="text" id="add-bookmark" placeholder="Your Link Here"></input>
@@ -46,9 +46,9 @@ const function generateAddView(){
       <button class="cancel" for="cancel-submission" type="button">Cancel</button>
       <button class="create" for="create-submission" type="button">Create</button>
     </div>`;
-};
+}
 
-const function generateExpandedView(){
+function generateExpandedView(){
   return `<button type="button" class="new-bookmark">New</button>
   <button type="button" class="filter">Filter By</button>
   <fieldset class="bookmarks">
@@ -60,11 +60,16 @@ const function generateExpandedView(){
       </div>
       <div class="content">Phasellus congue mattis vestibulum. Suspendisse tellus nisi, porttitor in lorem lobortis, vulputate consectetur tortor. Curabitur tempor luctus ante nec mollis. Aenean vel neque dapibus, rutrum felis id, cursus quam. Aenean pulvinar sapien non justo molestie, id feugiat lacus mollis. Praesent in felis ut leo viverra consectetur in eu nibh. Nulla ac ex quam.</div>
     </ul>
-  </fieldset>`
-};
+  </fieldset>`;
+}
 
 // TEMPLATE RENDERING FUNCTIONS
 
-const function render(){
-
+function render(){
+  let html='';
+  if (store.adding === false){
+    $('main').html(generateInitialView());
+  }
 }
+
+render();

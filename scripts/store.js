@@ -16,28 +16,29 @@ const store = {
       description: 'dolorum tempore deserunt',
       expanded: false
     } 
-    ...
+    // ...
   ],
   adding: false,
   error: null,
   filter: 0
 };
 
-const function findById(id){
-  return this.bookmarks.find(currentItem => currentItem.id ==== id);
+function findById(id){
+  return this.bookmarks.find(currentItem => currentItem.id === id);
 };
 
-const function addBookmark(entry){
+function addBookmark(entry){
   this.bookmarks.push(entry);
 };
 
-const function deleteBookmark(id){
+function deleteBookmark(id){
   this.bookmarks = this.bookmarks.filter(currentItem => currentItem.id !== id);
 };
 
 export default {
+  store,
   bookmarks,
   findById,
   addBookmark,
   deleteBookmark,
-};
+}
