@@ -1,0 +1,101 @@
+body {
+  background-color:#F8EADC;
+}
+
+h1 {
+  text-align: center;
+  color: #778BBE;
+}
+
+.buttons {
+  text-align: center;
+}
+
+.new-bookmark {
+  background-color: #F59BAD;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  border: none;
+  padding: 15px 32px;
+  font-size: 16px;
+}
+
+.drpbtn {
+  background-color: #F59BAD;
+  color: black;
+  padding: 15px 32px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-rating {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px;
+  z-index: 1;
+}
+
+.btn{
+  display: block;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  background-color: #FAD0D5;
+  color: white;
+}
+
+.dropdown-rating .btn i{
+  color: black;
+  padding: 5px 65px;
+  
+  text-decoration: none;
+  display: inline-block;
+}
+
+.dropdown:hover .dropdown-rating{
+  display: block;
+}
+
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover{
+  background-color: #ccc;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.collapsible:after {
+  content: '\02795';
+  font-size: 13px;
+  color: white;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\02796";
+}
