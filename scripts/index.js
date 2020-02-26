@@ -50,7 +50,7 @@ function generateExpandedView(){
   <button type="button" class="filter">Filter By</button>
   <fieldset class="bookmarks">
     <ul class="bookmark-titles">
-      <button type="button" id="expand" class="collapsible">Title</button>
+      <button type="button" id="expand" class="accordion">Title</button>
       <button type="button" class="delete">Delete</button>
       <div>
       <button type="button" class="original-site">Visit Site</button>
@@ -108,6 +108,7 @@ function handleCreate(){
 function handleExpand(){
   $('main').on('click','#expand',function(event){
     bookmarks.expanded=true;
+    render();
   });
 }
 
