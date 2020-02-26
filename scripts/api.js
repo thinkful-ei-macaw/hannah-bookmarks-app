@@ -25,7 +25,7 @@ function fetchApi(...args){
     });
 }
 
-function getBookmarks(){
+function getBookmark(){
   return fetchApi(`${BASE_URL}/bookmarks`);
 }
 
@@ -51,6 +51,6 @@ function deleteBookmark(id){
 
 export {
   addBookmark,
-  getBookmarks,
+  getBookmark,
   deleteBookmark
 };

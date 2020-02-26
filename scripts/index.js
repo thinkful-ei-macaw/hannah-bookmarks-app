@@ -1,20 +1,20 @@
 import {store} from './store.js';
-import {addBookmark, getBookmarks, deleteBookmark } from './api.js';
+import {addBookmark, getBookmark, deleteBookmark } from './api.js';
 
 
 // TEMPLATE GENERATION FUNCTIONS
 
 function generateInitialView(){
   return `<div class="buttons">
-  <button type="button" class="new-bookmark">New</button>
+  <button type="button" id="new" class="new-bookmark">New</button>
   <div class="dropdown">
   <button type="button" class="drpbtn">Filter By</button>
   <div class="dropdown-rating">
-    <button class="btn">5<i class="fa fas fa-star"></i></button>
-    <button class="btn">4<i class="fa fas fa-star"></i></button>
-    <button class="btn">3<i class="fa fas fa-star"></i></button>
-    <button class="btn">2<i class="fa fas fa-star"></i></button>
-    <button class="btn">1<i class="fa fas fa-star"></i></button>
+    <button id="filter-5" class="btn">5<i class="fa fas fa-star"></i></button>
+    <button id="filter-4" class="btn">4<i class="fa fas fa-star"></i></button>
+    <button id="filter-3" class="btn">3<i class="fa fas fa-star"></i></button>
+    <button id="filter-2" class="btn">2<i class="fa fas fa-star"></i></button>
+    <button id="filter-1" class="btn">1<i class="fa fas fa-star"></i></button>
   </div>
 </div>
   <fieldset class="bookmarks">
@@ -32,14 +32,11 @@ function generateAddView(){
     <div class="new-bookmark">
       <label for="bookmark-entry"></label>
       <input for="bookmark-title" type="text" placeholder="Title"></input>
-      <i class="fa fas fa-star"></i>
-      {/* <!-- .checked {
-        color: orange;
-      } --> */}
-      <i class="fa fas fa-star"></i>
-      <i class="fa fas fa-star"></i>
-      <i class="fa fas fa-star"></i>
-      <i class="fa fas fa-star"></i>
+      <i id="select-5" class="fa fas fa-star"></i>
+      <i id="select-4" class="fa fas fa-star"></i>
+      <i id="select-3" class="fa fas fa-star"></i>
+      <i id="select-2" class="fa fas fa-star"></i>
+      <i id="select-1" class="fa fas fa-star"></i>
       <textarea for="bookmark-description" name="bookmark-description" placeholder="Add a description"></textarea>
     </div> 
     <div>
@@ -74,6 +71,9 @@ function render(){
   else if (bookmarks.expanded === true){
     $('main').html(generateExpandedView());
   }
+  // else if(store.adding === true){
+  //   $('main').html(generateAddView());
+  // }
   else {
     $('main').html(generateAddView());
   }
@@ -81,4 +81,14 @@ function render(){
 
 $(render());
 
+// EVENT HANDLER FUNCTIONS
 // $(function(){ handleFormSubmission(); handleButtonClick(); render(); })
+
+function handleButtonClick(){
+  $('main').on('click','#new', function(event){
+    event.preventDefault();
+    store.adding === true;
+    render();
+  });
+}
+
