@@ -19,7 +19,12 @@ function generateInitialView(){
 </div>
   <fieldset class="bookmarks">
     <ul class="bookmark-titles">
-      <button type="button" class="accordion">Title</button>
+      <button type="button" id="expand" class="accordion">Title</button>
+      <div class="content">
+        <p>
+          Phasellus congue mattis vestibulum. Suspendisse tellus nisi, porttitor in lorem lobortis, vulputate consectetur tortor. Curabitur tempor luctus ante nec mollis. Aenean vel neque dapibus, rutrum felis id, cursus quam. Aenean pulvinar sapien non justo molestie, id feugiat lacus mollis. Praesent in felis ut leo viverra consectetur in eu nibh. Nulla ac ex quam.
+        </p>
+      </div>
     </ul>
   </fieldset>`;
 }
@@ -112,6 +117,7 @@ function handleCreate(){
 function handleExpand(){
   $('main').on('click','#expand',function(event){
     bookmarks.expanded=true;
+    console.log('click');
     render();
   });
 }
