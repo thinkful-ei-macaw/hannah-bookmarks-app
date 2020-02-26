@@ -25,7 +25,7 @@ function generateInitialView(){
 }
 
 function generateAddView(){
-  `<form>
+  return `<form>
       <label for="add-bookmark">Add New Bookmark</label>
       <input type="text" id="add-bookmark" placeholder="Your Link Here"></input>
     </form> 
@@ -50,7 +50,7 @@ function generateExpandedView(){
   <button type="button" class="filter">Filter By</button>
   <fieldset class="bookmarks">
     <ul class="bookmark-titles">
-      <button type="button" class="collapsible">Title</button>
+      <button type="button" id="expand" class="collapsible">Title</button>
       <button type="button" class="delete">Delete</button>
       <div>
       <button type="button" class="original-site">Visit Site</button>
@@ -68,12 +68,9 @@ function render(){
     $('main').html(generateInitialView());
     return;
   }
-  else if (bookmarks.expanded === true){
+  else if (store.bookmarks.expanded === true){
     $('main').html(generateExpandedView());
   }
-  // else if(store.adding === true){
-  //   $('main').html(generateAddView());
-  // }
   else {
     $('main').html(generateAddView());
   }
@@ -93,5 +90,32 @@ function handleButtonClick(){
     
   });
 }
-handleButtonClick();
 
+function handleCancel(){
+  $('main').on('click','.cancel',function(event){
+    event.preventDefault();
+    store.adding = false;
+    render();
+  });
+}
+
+function handleCreate(){
+  $('main').on('click','.create',function(event){
+
+  });
+}
+
+function handleExpand(){
+  $('main').on('click','#expand',function(event){
+    bookmarks.expanded=true;
+  });
+}
+
+function eventHandler(){
+  render();
+  handleButtonClick();
+  handleCancel();
+  handleExpand();
+}
+
+$(eventHandler());
