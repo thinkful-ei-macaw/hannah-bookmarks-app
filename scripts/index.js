@@ -1,5 +1,5 @@
-import {store} from './store.js';
-import {addBookmark, getBookmark, deleteBookmark } from './api.js';
+import {store} from '../scripts/store.js';
+import {addBookmark, getBookmark, deleteBookmark } from '../scripts/api.js';
 
 
 // TEMPLATE GENERATION FUNCTIONS
