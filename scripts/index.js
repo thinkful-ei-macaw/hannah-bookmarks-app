@@ -88,8 +88,9 @@ function handleButtonClick(){
   $('main').on('click','#new', function(event){
     event.preventDefault();
     store.adding = true;
-    console.log('click');
     render();
+    console.log('click');
+    
   });
 }
 handleButtonClick();
