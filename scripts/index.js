@@ -21,9 +21,13 @@ function generateInitialView(){
     <ul class="bookmark-titles">
       <button type="button" id="expand" class="accordion">Title</button>
       <div class="content" style="display: none;">
+      <button type="button" class="original-site">Visit Site</button>
         <p>
           Phasellus congue mattis vestibulum. Suspendisse tellus nisi, porttitor in lorem lobortis, vulputate consectetur tortor. Curabitur tempor luctus ante nec mollis. Aenean vel neque dapibus, rutrum felis id, cursus quam. Aenean pulvinar sapien non justo molestie, id feugiat lacus mollis. Praesent in felis ut leo viverra consectetur in eu nibh. Nulla ac ex quam.
         </p>
+        <div>
+        <button type="button" class="delete">Delete</button>
+        </div>
       </div>
     </ul>
   </fieldset>`;
@@ -37,12 +41,14 @@ function generateAddView(){
     <div class="new-bookmark">
       <label for="bookmark-entry"></label>
       <input for="bookmark-title" type="text" placeholder="Title"></input>
-      <i id="select-5" class="fa fas fa-star"></i>
-      <i id="select-4" class="fa fas fa-star"></i>
-      <i id="select-3" class="fa fas fa-star"></i>
-      <i id="select-2" class="fa fas fa-star"></i>
-      <i id="select-1" class="fa fas fa-star"></i>
-      <textarea for="bookmark-description" name="bookmark-description" placeholder="Add a description"></textarea>
+      <div class="star">
+        <i id="select-5" class="fa fas fa-star"></i>
+        <i id="select-4" class="fa fas fa-star"></i>
+        <i id="select-3" class="fa fas fa-star"></i>
+        <i id="select-2" class="fa fas fa-star"></i>
+        <i id="select-1" class="fa fas fa-star"></i>
+      </div>
+      <textarea class="bookmark-description" for="bookmark-description" name="bookmark-description" placeholder="Add a description"></textarea>
     </div> 
     <div>
       <button class="cancel" for="cancel-submission" type="button">Cancel</button>
@@ -57,13 +63,13 @@ function generateExpandedView(){
     <ul class="bookmark-titles">
       <button type="button" id="expand" class="accordion">Title</button>
       <div class="content" style="display: block">
+      <button type="button" class="original-site">Visit Site</button>
         <p>
           Phasellus congue mattis vestibulum. Suspendisse tellus nisi, porttitor in lorem lobortis, vulputate consectetur tortor. Curabitur tempor luctus ante nec mollis. Aenean vel neque dapibus, rutrum felis id, cursus quam. Aenean pulvinar sapien non justo molestie, id feugiat lacus mollis. Praesent in felis ut leo viverra consectetur in eu nibh. Nulla ac ex quam.
         </p>
-      </div>
-      <button type="button" class="delete">Delete</button>
-      <div>
-      <button type="button" class="original-site">Visit Site</button>
+        <div>
+        <button type="button" class="delete">Delete</button>
+        </div>
       </div>
     </ul>
   </fieldset>`;
@@ -94,6 +100,7 @@ function handleButtonClick(){
   $('main').on('click','#new', function(event){
     event.preventDefault();
     store.adding = true;
+    store.bookmarks.expanded = false;
     render();
     console.log('click');
     
@@ -110,14 +117,41 @@ function handleCancel(){
 
 function handleCreate(){
   $('main').on('click','.create',function(event){
+    event.preventDefault();
+    let newName = $(".bookmark-title").val();
+    $(".bookmark-title").val();
+    let newUrl= $("#add-bookmark").val();
+    $("#add-bookmark").val();
+    let newDescription= $('.bookmark-description').val();
+    $('.bookmark-description').val();
+    api
+      .createBookmark(
+        newName,
+        newUrl,
+        newDescription,
+      )
+      .then(
+        newName,
+        newUrl,
+        newDescription => {
+          store.addBookmark(
+            newName,
+            newUrl,
+            newDescription
+          );
+            render();
+        }
+      );
+        
 
+    
   });
 }
 
 function handleExpand(){
   $('main').on('click','#expand',function(event){
     store.bookmarks.expanded=true;
-    $($(event.currentTarget).siblings().get(0)).toggle()
+    $($(event.currentTarget).siblings().get(0)).toggle();
   });
 }
 

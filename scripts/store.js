@@ -28,8 +28,7 @@ function findById(id){
 }
 
 function addBookmark(entry){
-  newbookmark.expanded === false;
-  this.bookmarks.push(entry);
+  this.store.bookmarks.push(entry);
 }
 
 function deleteBookmark(id){

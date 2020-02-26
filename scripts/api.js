@@ -29,7 +29,7 @@ function getBookmark(){
   return fetchApi(`${BASE_URL}/bookmarks`);
 }
 
-function addBookmark(title, url, description, rating){
+function createBookmark(title, url, description, rating){
   const newBookmark=JSON.stringify({
     title,
     url,
@@ -50,7 +50,7 @@ function deleteBookmark(id){
 }
 
 export {
-  addBookmark,
+  createBookmark,
   getBookmark,
   deleteBookmark
 };
