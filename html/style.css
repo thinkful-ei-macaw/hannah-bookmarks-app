@@ -66,19 +66,24 @@ h1 {
   display: block;
 }
 
-.collapsible {
+.bookmarks{
+  border: none;
+}
+
+.accordion {
   background-color: #9EDEF9;
   color: #444;
   cursor: pointer;
   padding: 18px;
   width: 100%;
   border: none;
-  text-align: left;
+  text-align: center;
   outline: none;
+  transition: 0.4s;
   font-size: 15px;
 }
 
-.active, .collapsible:hover{
+.active, .accordion:hover{
   background-color: #778BBE;
   color: #F59BAD;
 }
@@ -90,7 +95,7 @@ h1 {
   background-color: #f1f1f1;
 }
 
-.collapsible:after {
+.accordion:after {
   content: '\02795';
   font-size: 13px;
   color: white;
