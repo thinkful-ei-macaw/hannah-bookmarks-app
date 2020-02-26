@@ -125,8 +125,7 @@ function handleCreate(){
     let newDescription= $('.bookmark-description').val();
     $('.bookmark-description').val();
     api
-      .createBookmark(
-        newName,
+      .createBookmark(newName,
         newUrl,
         newDescription,
       )
@@ -158,9 +157,9 @@ function handleExpand(){
 function eventHandler(){
   render();
   handleButtonClick();
-  handleCreate();
   handleCancel();
   handleExpand();
+  handleCreate();
 }
 
 $(eventHandler());
