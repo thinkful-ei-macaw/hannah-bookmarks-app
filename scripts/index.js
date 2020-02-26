@@ -158,6 +158,7 @@ function handleExpand(){
 function eventHandler(){
   render();
   handleButtonClick();
+  handleCreate();
   handleCancel();
   handleExpand();
 }
