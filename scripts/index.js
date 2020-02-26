@@ -1,5 +1,5 @@
 import {store} from '../scripts/store.js';
-import {addBookmark, getBookmark, deleteBookmark } from '../scripts/api.js';
+import {createBookmark, getBookmark, deleteBookmark } from '../scripts/api.js';
 
 
 // TEMPLATE GENERATION FUNCTIONS
@@ -139,12 +139,12 @@ function handleCreate(){
             newUrl,
             newDescription
           );
-            render();
+      
         }
       );
         
-
-    
+console.log('hello');
+    render();
   });
 }
 
