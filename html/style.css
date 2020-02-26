@@ -54,12 +54,13 @@ h1 {
 }
 
 .dropdown-rating .btn i{
-  color: black;
+  color: white;
   padding: 5px 65px;
-  
+  float: right; 
   text-decoration: none;
-  display: inline-block;
 }
+
+
 
 .dropdown:hover .dropdown-rating{
   display: block;
@@ -100,3 +101,4 @@ h1 {
 .active:after {
   content: "\02796";
 }
+
