@@ -49,7 +49,7 @@ function deleteBookmark(id){
   });
 }
 
-export default {
+export {
   addBookmark,
   getBookmarks,
   deleteBookmark

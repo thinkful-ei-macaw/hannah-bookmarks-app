@@ -35,9 +35,8 @@ function deleteBookmark(id){
   this.bookmarks = this.bookmarks.filter(currentItem => currentItem.id !== id);
 }
 
-export default {
+export {
   store,
-  bookmarks:store.bookmarks,
   findById,
   addBookmark,
   deleteBookmark,
