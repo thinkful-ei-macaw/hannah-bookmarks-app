@@ -33,8 +33,8 @@ function createBookmark(title, url, description, rating){
   const newBookmark=JSON.stringify({
     "title": title,
     "url": url
-    // "description": description,
-    // "rating": rating
+    "description": description,
+    "rating": rating
   });
 
   console.log(newBookmark);
