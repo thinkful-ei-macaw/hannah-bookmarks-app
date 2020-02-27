@@ -71,6 +71,21 @@ function generateExpandedView(){
 function render(){
   getBookmark().then((data)=>{
     bookmarks = data
+    bookmarks.map((bookmark) => {
+  
+      $('.bookmark-titles').append(`
+           <button type="button" id="expand" class="accordion">${bookmark.title}</button>
+           <div class="content" style="display: block">
+           <a href="${bookmark.url}" class="original-site">Visit Site</a>
+             <p>${bookmark.desc}</p>
+             <div>
+             <button type="button" class="delete">Delete</button>
+             </div>
+           </div>
+      `)
+     
+     })
+     
   });
 
   if (store.adding === false){
