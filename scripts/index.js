@@ -124,6 +124,7 @@ function handleCreate(){
     $('#add-bookmark').val();
     let newDescription= $('.bookmark-description').val();
     $('.bookmark-description').val();
+    let newRating= 5;
     createBookmark(newName,
       newUrl,
       newDescription,

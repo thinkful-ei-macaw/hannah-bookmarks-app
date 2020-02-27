@@ -32,7 +32,7 @@ function getBookmark(){
 function createBookmark(title, url, description, rating){
   const newBookmark=JSON.stringify({
     "title": title,
-    "url": url
+    "url": url,
     "description": description,
     "rating": rating
   });
