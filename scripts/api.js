@@ -31,17 +31,21 @@ function getBookmark(){
 
 function createBookmark(title, url, description, rating){
   const newBookmark=JSON.stringify({
-    title,
-    url,
-    description,
-    rating
+    "title": title,
+    "url": url
+    // "description": description,
+    // "rating": rating
   });
+
+  console.log(newBookmark);
+
   return fetchApi(`${BASE_URL}/bookmarks`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: newBookmark
   });
 }
+// createBookmark("google","https://www.google.com");
 
 function deleteBookmark(id){
   return fetchApi(`${BASE_URL}/bookmarks/${id}`,{

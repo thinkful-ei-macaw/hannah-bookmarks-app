@@ -19,7 +19,7 @@ function generateInitialView(){
 </div>
   <fieldset class="bookmarks">
     <ul class="bookmark-titles">
-      <button type="button" id="expand" class="accordion">Title</button>
+      <button type="button" id="expand" class="accordion">${store.bookmarks[0].title}</button>
       <div class="content" style="display: none;">
       <button type="button" class="original-site">Visit Site</button>
         <p>
@@ -40,7 +40,7 @@ function generateAddView(){
     </form> 
     <div class="new-bookmark">
       <label for="bookmark-entry"></label>
-      <input for="bookmark-title" type="text" placeholder="Title"></input>
+      <input class="bookmark-title" type="text" placeholder="Title"></input>
       <div class="star">
         <i id="select-5" class="fa fas fa-star"></i>
         <i id="select-4" class="fa fas fa-star"></i>
@@ -61,7 +61,7 @@ function generateExpandedView(){
   <button type="button" class="filter">Filter By</button>
   <fieldset class="bookmarks">
     <ul class="bookmark-titles">
-      <button type="button" id="expand" class="accordion">Title</button>
+      <button type="button" id="expand" class="accordion">${store.bookmarks[0].title}</button>
       <div class="content" style="display: block">
       <button type="button" class="original-site">Visit Site</button>
         <p>
@@ -118,17 +118,18 @@ function handleCancel(){
 function handleCreate(){
   $('main').on('click','.create',function(event){
     event.preventDefault();
-    let newName = $(".bookmark-title").val();
-    $(".bookmark-title").val();
-    let newUrl= $("#add-bookmark").val();
-    $("#add-bookmark").val();
+    let newName = $('.bookmark-title').val();
+    $('.bookmark-title').val();
+    let newUrl= $('#add-bookmark').val();
+    $('#add-bookmark').val();
     let newDescription= $('.bookmark-description').val();
     $('.bookmark-description').val();
-    api
-      .createBookmark(newName,
-        newUrl,
-        newDescription,
-      )
+    let newRating=5;
+    createBookmark(newName,
+      newUrl,
+      newDescription,
+      newRating
+    )
       .then(
         newName,
         newUrl,
@@ -141,8 +142,10 @@ function handleCreate(){
       
         }
       );
-        
-console.log('hello');
+    
+    store.adding = false;
+  
+    // console.log('hello');
     render();
   });
 }
