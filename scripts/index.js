@@ -1,6 +1,6 @@
 import {store} from '../scripts/store.js';
 import {createBookmark, getBookmark, deleteBookmark } from '../scripts/api.js';
-
+let bookmarks = [];
 
 // TEMPLATE GENERATION FUNCTIONS
 
@@ -61,16 +61,7 @@ function generateExpandedView(){
   <button type="button" class="filter">Filter By</button>
   <fieldset class="bookmarks">
     <ul class="bookmark-titles">
-      <button type="button" id="expand" class="accordion">${store.bookmarks[0].title}</button>
-      <div class="content" style="display: block">
-      <button type="button" class="original-site">Visit Site</button>
-        <p>
-          Phasellus congue mattis vestibulum. Suspendisse tellus nisi, porttitor in lorem lobortis, vulputate consectetur tortor. Curabitur tempor luctus ante nec mollis. Aenean vel neque dapibus, rutrum felis id, cursus quam. Aenean pulvinar sapien non justo molestie, id feugiat lacus mollis. Praesent in felis ut leo viverra consectetur in eu nibh. Nulla ac ex quam.
-        </p>
-        <div>
-        <button type="button" class="delete">Delete</button>
-        </div>
-      </div>
+      
     </ul>
   </fieldset>`;
 }
@@ -78,7 +69,10 @@ function generateExpandedView(){
 // TEMPLATE RENDERING FUNCTIONS
 
 function render(){
-  let bookmarks = [...store.bookmarks];
+  getBookmark().then((data)=>{
+    bookmarks = data
+  });
+
   if (store.adding === false){
     $('main').html(generateInitialView());
     return;
@@ -91,7 +85,6 @@ function render(){
   }
 }
 
-$(render());
 
 // EVENT HANDLER FUNCTIONS
 // $(function(){ handleFormSubmission(); handleButtonClick(); render(); })
