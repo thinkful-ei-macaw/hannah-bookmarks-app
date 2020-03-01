@@ -11,12 +11,12 @@ function findById(id){
 }
 
 function addBookmark(bookmark){
-  bookmark.expanded === false;
+  bookmark.expanded = false;
   store.bookmarks.push(bookmark);
 }
 
 function findAndUpdate(id, newData){
-  let currentBookmark = this.findById(id);
+  let currentBookmark = store.findById(id);
   Object.assign(currentBookmark, newData);
 }
 

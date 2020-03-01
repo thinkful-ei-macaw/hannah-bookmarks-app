@@ -29,15 +29,13 @@ function getBookmark(){
   return fetchApi(`${BASE_URL}/bookmarks`);
 }
 
-function createBookmark(title, url, description, rating){
+function createBookmark(title, url, desc, rating){
   const newBookmark=JSON.stringify({
     title,
     url,
-    description,
+    desc,
     rating
   });
-
-  console.log(newBookmark);
 
   return fetchApi(`${BASE_URL}/bookmarks`, {
     method: 'POST',
