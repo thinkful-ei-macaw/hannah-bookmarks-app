@@ -3,11 +3,11 @@ import {store,
   addBookmark,
   findAndUpdate,
   deleteBookmark,
-  handleError}} from '../scripts/store.js';
+  handleError} from '../scripts/store.js';
 import {getBookmark,
   createBookmark,
   updateBookmark,
-  deleteBookmark} from '../scripts/api.js';
+  findAndDelete} from '../scripts/api.js';
 
 // TEMPLATE GENERATION FUNCTIONS
 
@@ -45,7 +45,7 @@ function generateAddView(){
 }
 
 function generateExpandedView(bookmark){
-  const stars = translateRating(bookmark.rating);
+  const stars = translateRating(store.bookmark.rating);
   if(bookmark.expanded === false) {
     return `
   <form class="bookmark-container" data-id="${bookmark.id}">
@@ -57,22 +57,22 @@ function generateExpandedView(bookmark){
   </div>
   </form>
   `;
- }
-  else if(bookmarks.expanded === true) {
+  }
+  else if(bookmark.expanded === true) {
     return `
-  <form class="expanded-container" data-id="${bookmarks.id}">
-    <h2>${bookmarks.title}</h2>
+  <form class="expanded-container" data-id="${store.bookmarks.id}">
+    <h2>${store.bookmarks.title}</h2>
     <span class="star-rating"> ${stars} </span>
     <h3>Visit:</h3>
-    <a href=${bookmarks.url}>${bookmarks.url}</a>
+    <a href=${store.bookmarks.url}>${store.bookmarks.url}</a>
     <h3>Description</h3>
-    <p>${bookmarks.desc}</p>
+    <p>${store.bookmarks.desc}</p>
     <button type="submit" class="delete-button"> &#128465; </button>
     <button type="button" name="cancel-expand" class="cancel-button"> Cancel </button>
   </form>
   `;
   }
-};
+}
 
 function templateEdit(){ 
 
@@ -91,7 +91,7 @@ function templateEdit(){
     <button type="button" name="cancel"> Cancel </button>
     <input type="submit" value="Submit">
   `;
-  };
+}
   
 
 // TEMPLATE RENDERING FUNCTIONS
@@ -101,9 +101,9 @@ function render(){
   if(store.adding === true){
     $('main').append(generateAddView());
   }
-  let bookmarks = [...store.bookmarks];
+  let bookmark = [...store.bookmarks];
   if(store.filter > 0) {
-    bookmarks = bookmarks.filter(bookmark => bookmark.rating >= store.filter);
+    bookmark = bookmark.filter(bookmark => bookmark.rating >= store.filter);
   }
 }
 //   getBookmark().then((data)=>{
@@ -146,6 +146,7 @@ function handleBookmarkList(bookmarks){
 }
 
 
+
 function handleButtonClick(){
   $('main').on('click','#new', function(event){
     event.preventDefault();
@@ -171,21 +172,22 @@ function handleCreate(){
     let newBookmarkUrl = $('input[type="text"][name="url"]').val();
     let newBookmarkRating = $('input[type="radio"]:checked').val();
     let newBookmarkDescr = $('input[type="text"][name="description"').val();
-    api.createBookmark(newName,
-      newUrl,
-      newDescription,
-      newRating
+    createBookmark(
+      newBookmarkName,
+      newBookmarkUrl,
+      newBookmarkRating,
+      newBookmarkDescr
     )
       .then((newBookmark)=> {
-          store.addBookmark(newBookmark);
-          store.adding = false;
-          render();
+        store.addBookmark(newBookmark);
+        store.adding = false;
+        render();
       })
       .catch((error) => {
         store.handleError(error.message);
         console.error(error.message);
         renderError();
-      })
+      });
   });
 }
 
@@ -194,9 +196,9 @@ function handleCreate(){
 function handleExpand(){
   $('main').on('click','.bookmark-container',function(event){
     let id=findBookmarkIdFromElement(event.currentTarget);
-    let bookmark = store.findById(id);
-   bookmark.expanded = !bookmark.expanded;
-   render();
+    let bookmark = findById(id);
+    bookmark.expanded = !bookmark.expanded;
+    render();
   });
 }
 
@@ -205,7 +207,7 @@ function handleDelete(){
     console.log('handleDelete is running');
     event.preventDefault();
     const id = findBookmarkIdFromElement(event.currentTarget);
-    api.deleteBookmark(id)
+    findAndDelete(id)
       .then(()=> {
         store.findAndDelete(id);
         render();
@@ -226,43 +228,43 @@ function handleFilter(){
     store.filter = filter;
     render();
   });
-};
+}
 
 function handleCancelExpand(){
   $('main').on('click', 'button[name="cancel-expand"]', event => {
     event.preventDefault();
     let id = findBookmarkIdFromElement(event.currentTarget);
     let bookmark = store.findById(id);
-    if(bookmarks.expanded === true){
-      bookmarks.expanded = false;
+    if(bookmark.expanded === true){
+      bookmark.expanded = false;
     }
-      render();
+    render();
   });
 }
 
 function handleCancelAdd(){
   $('main').on('click', 'button[name="cancel-add"]', event => {
     event.preventDefault();
-    store.adding = false;
+    store.addMode = false;
     render();
   });
 }
 
 function translateRating(rating){
   if(rating === 1) {
-    return `&#9733;`;
+    return '&#9733;';
   }
   else if(rating === 2) {
-    return `&#9733; &#9733;`;
+    return '&#9733; &#9733;';
   }
   else if(rating === 3) {
-    return `&#9733; &#9733; &#9733;`;
+    return '&#9733; &#9733; &#9733;';
   }
   else if(rating  === 4) {
-    return `&#9733; &#9733; &#9733; &#9733;`;
+    return '&#9733; &#9733; &#9733; &#9733;';
   }
   else if(rating === 5) {
-    return `&#9733; &#9733; &#9733; &#9733; &#9733;`;
+    return '&#9733; &#9733; &#9733; &#9733; &#9733;';
   }
   else{
     return '';
@@ -272,7 +274,7 @@ function translateRating(rating){
 function findBookmarkIdFromElement(bookmark) {
   return $(bookmark)
     .closest('form')
-    .data('id')
+    .data('id');
 }
 
 function generateError(message) {
@@ -310,7 +312,6 @@ function eventHandler(){
   handleExpand();
   handleCreate();
   handleDelete();
-  handleEdit();
   handleCancelExpand();
   handleCancelAdd();
   handleCloseError();
@@ -319,4 +320,7 @@ function eventHandler(){
   renderError();
 }
 
-$(eventHandler());
+export {
+  render,
+  eventHandler
+};

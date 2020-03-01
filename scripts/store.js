@@ -1,9 +1,10 @@
  const store = {
-  bookmarks:[];
+  bookmarks:[],
   adding: false,
   error: null,
-  filter: 0
+  filter: 0,
 };
+
 
 function findById(id){
   return this.bookmarks.find(currentBookmark => currentBookmark.id === id);
