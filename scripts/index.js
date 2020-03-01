@@ -29,7 +29,7 @@ function generateInitialView(){
 
 function generateAddView(){
   return `<form class="add-bookmark-form">
-  <input type="text" name="bookmark-name" value="Name"/>
+  <input type="text" name="bookmark-name" placeholder="Name"/>
   <input type="text" name="url" value="https://www."/>
   <div class="rating">
     <input type="radio" id="star5" name="rating" value="5" class="radio-btn hide"/><label class="full" for="star5" title="5 stars">&#9733;</label>
@@ -38,7 +38,7 @@ function generateAddView(){
     <input type="radio" id="star2" name="rating" value="2" class="radio-btn hide"/><label class="full" for="star2" title="2 stars">&#9733;</label>
     <input type="radio" id="star1" name="rating" value="1" class="radio-btn hide"/><label class="full" for="star1" title="1 star">&#9733;</label>
   </div>
-    <input type="text" name="description" value="Bookmark Description"/>
+    <input type="text" name="description" placeholder="Bookmark Description"/>
     <button name="cancel-add" id="cancel-add-button"> Cancel </button>
     <input type="submit" id="add-submit" value="Submit">
   </form>`;
@@ -46,7 +46,7 @@ function generateAddView(){
 
 function generateExpandedView(bookmark){
   const stars = translateRating(store.bookmark.rating);
-  if(bookmark.expanded === false) {
+  if(store.bookmark.expanded === false) {
     return `
   <form class="bookmark-container" data-id="${bookmark.id}">
   <div class="bookmark-thumbnail">  
@@ -58,7 +58,7 @@ function generateExpandedView(bookmark){
   </form>
   `;
   }
-  else if(bookmark.expanded === true) {
+  else if(store.bookmark.expanded === true) {
     return `
   <form class="expanded-container" data-id="${store.bookmarks.id}">
     <h2>${store.bookmarks.title}</h2>
@@ -66,7 +66,7 @@ function generateExpandedView(bookmark){
     <h3>Visit:</h3>
     <a href=${store.bookmarks.url}>${store.bookmarks.url}</a>
     <h3>Description</h3>
-    <p>${store.bookmarks.desc}</p>
+    <p>${store.bookmarks.description}</p>
     <button type="submit" class="delete-button"> &#128465; </button>
     <button type="button" name="cancel-expand" class="cancel-button"> Cancel </button>
   </form>
@@ -175,11 +175,11 @@ function handleCreate(){
     createBookmark(
       newBookmarkName,
       newBookmarkUrl,
-      newBookmarkRating,
-      newBookmarkDescr
+      newBookmarkDescr,
+      newBookmarkRating
     )
       .then((newBookmark)=> {
-        store.addBookmark(newBookmark);
+        addBookmark(newBookmark);
         store.adding = false;
         render();
       })
@@ -251,6 +251,10 @@ function handleCancelAdd(){
 }
 
 function translateRating(rating){
+  // $('.add-submit').on('click',function(event){
+  //   event.preventDefault();
+  //   store.bookmarks.rating.push($(this).val());
+  // })
   if(rating === 1) {
     return '&#9733;';
   }

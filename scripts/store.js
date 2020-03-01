@@ -7,12 +7,12 @@
 
 
 function findById(id){
-  return this.bookmarks.find(currentBookmark => currentBookmark.id === id);
+  return store.bookmarks.find(currentBookmark => currentBookmark.id === id);
 }
 
 function addBookmark(bookmark){
   bookmark.expanded === false;
-  this.bookmarks.push(bookmark);
+  store.bookmarks.push(bookmark);
 }
 
 function findAndUpdate(id, newData){
@@ -21,11 +21,11 @@ function findAndUpdate(id, newData){
 }
 
 function deleteBookmark(id){
-  this.bookmarks = this.bookmarks.filter(currentItem => currentItem.id !== id);
+  store.bookmarks = store.bookmarks.filter(currentItem => currentItem.id !== id);
 }
 
 function handleError(error){
-  this.error = error;
+  store.error = error;
 }
 
 export {
