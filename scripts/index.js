@@ -22,7 +22,7 @@ function generateInitialView(){
       <option value=4> &#9733; &#9733; &#9733; &#9733;  and above</option>
       <option value=5> &#9733; &#9733; &#9733; &#9733; &#9733;  only</option>
     </select>
-  
+    ${store.bookmarks}
    <div class="error-container"> </div>
    </div>`;
 }
@@ -188,6 +188,8 @@ function handleCreate(){
         console.error(error.message);
         renderError();
       });
+    
+    // store.bookmarks.push();
   });
 }
 

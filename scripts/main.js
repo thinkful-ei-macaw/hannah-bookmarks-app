@@ -14,7 +14,7 @@ import {render,eventHandler} from '..scripts/index.js';
 function mainFunc() {
   getBookmark()
     .then((bookmark) => {
-      bookmark.forEach((bookmark) => store.createBookmark(bookmark));
+      bookmark.forEach((bookmark) => createBookmark(bookmark));
       render();
     });
   eventHandler();
