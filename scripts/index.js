@@ -142,7 +142,7 @@ function render(){
 // $(function(){ handleFormSubmission(); handleButtonClick(); render(); })
 
 function handleBookmarkList(bookmarks){
-  return bookmarks.map(bookmark => (generateExpandedView(bookmark))).join('');
+  return store.bookmarks.map(bookmark => (generateExpandedView(bookmark))).join('');
 }
 
 
@@ -158,7 +158,7 @@ function handleButtonClick(){
 }
 
 function handleCancel(){
-  $('main').on('click','.cancel',function(event){
+  $('main').on('click','#cancel-add-button',function(event){
     event.preventDefault();
     store.adding = false;
     render();
@@ -184,7 +184,7 @@ function handleCreate(){
         render();
       })
       .catch((error) => {
-        store.handleError(error.message);
+        handleError(error.message);
         console.error(error.message);
         renderError();
       });
@@ -319,6 +319,8 @@ function eventHandler(){
   handleFilter();
   renderError();
 }
+
+$(eventHandler());
 
 export {
   render,
