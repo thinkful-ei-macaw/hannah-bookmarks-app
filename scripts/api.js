@@ -23,11 +23,11 @@ function fetchApi(...args){
       }
       return data;
     });
-}
+};
 
 function getBookmark(){
   return fetchApi(`${BASE_URL}/bookmarks`);
-}
+};
 
 function createBookmark(title, url, description, rating){
   const newBookmark=JSON.stringify({
@@ -44,17 +44,30 @@ function createBookmark(title, url, description, rating){
     headers: {'Content-Type': 'application/json'},
     body: newBookmark
   });
-}
+};
 // createBookmark("google","https://www.google.com");
+
+function updateBookmark(id, updateData){
+  const newData = JSON.stringify(updateData);
+  return bookmarkApiFetch(`${BASE_URL}/bookmarks/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: newData
+  });
+};
+
 
 function deleteBookmark(id){
   return fetchApi(`${BASE_URL}/bookmarks/${id}`,{
     method: 'DELETE'
   });
-}
+};
 
 export {
-  createBookmark,
   getBookmark,
+  createBookmark,
+  updateBookmark,
   deleteBookmark
 };
