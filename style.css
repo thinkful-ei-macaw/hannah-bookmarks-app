@@ -41,7 +41,7 @@ h1 {
   cursor: pointer;
   border: none;
   padding: 5px;
-  width: 10%;
+  width: 15%;
   margin: 5px;
 }
 
@@ -191,15 +191,7 @@ input[type=text]{
 }
 
 @media screen and (min-width: 380px){
-  .new-bookmark, #dropdown {
-    background-color: #F59BAD;
-    color: #000000;
-    cursor: pointer;
-    display: inline-block;
-    border: none;
-    padding: 15px 32px;
-    font-size: 16px;
-  }
+  
 }
 
 @media screen and (min-width: 800px){
