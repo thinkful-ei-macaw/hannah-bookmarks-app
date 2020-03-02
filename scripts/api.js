@@ -43,7 +43,6 @@ function createBookmark(title, url, desc, rating){
     body: newBookmark
   });
 }
-// createBookmark("google","https://www.google.com");
 
 function updateBookmark(id, updateData){
   const newData = JSON.stringify(updateData);

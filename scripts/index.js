@@ -14,12 +14,14 @@ function generateInitialView(){
   return `<div class="buttons">
   <button type="button" id="new" class="new-bookmark">New</button>
   <select id="dropdown">
+    <div class="dropdown-menu">
       <option ${store.filter === 0 ? 'selected' : ''} value=0>Show by rating</option>
       <option ${store.filter === 1 ? 'selected' : ''} value=1>All</option>
       <option ${store.filter === 2 ? 'selected' : ''} value=2> &#9733;	&#9733;  and above</option>
       <option ${store.filter === 3 ? 'selected' : ''} value=3> &#9733; &#9733; &#9733;  and above</option>
       <option ${store.filter === 4 ? 'selected' : ''} value=4> &#9733; &#9733; &#9733; &#9733;  and above</option>
       <option ${store.filter === 5 ? 'selected' : ''} value=5> &#9733; &#9733; &#9733; &#9733; &#9733;  only</option>
+    </div>
     </select>
     <ul class="bookmark-titles">${generateBookmarks()}</ul>
    <div class="error-container"> </div>
@@ -43,8 +45,8 @@ function generateBookmarks(){
         <p>
         ${bookmark.desc}
         </p>
+        <a href="${bookmark.url}" target="_blank">Visit Site</a>
         <button type="button" data-id="${bookmark.id}" class="delete">Delete</button>
-        <a href="${bookmark.url}">Visit Site</a>
       </div>` : ''}
     </li>
   `;
@@ -65,8 +67,10 @@ function generateAddView(){
     <input type="radio" id="star5" name="rating" value="5" class="radio-btn hide"/><label class="full" for="star5" title="5 star">5 &#9733;s</label>
   </div>
     <input type="text" name="desc" placeholder="Bookmark Description"/>
-    <button name="cancel-add" id="cancel-add-button"> Cancel </button>
+    <div class="add-buttons">
     <input type="submit" id="add-submit" value="Submit">
+    <button name="cancel-add" id="cancel-add-button"> Cancel </button>
+    </div>
   </form>`;
 }
 
