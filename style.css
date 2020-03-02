@@ -190,6 +190,22 @@ input[type=text]{
   margin: 5px;
 }
 
+.error-content p{
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+#cancel-error{
+  background-color: #F59BAD;
+  cursor: pointer;
+  border: none;
+  padding: 5px;
+  margin: 5px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  width: 20px;
+}
+
+
+
 @media screen and (min-width: 380px){
   
 }
@@ -376,6 +392,14 @@ input[type=text]{
   }
   
   #cancel-add-button{
+    background-color: #F59BAD;
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+    margin: 5px;
+  }
+
+  #cancel-error{
     background-color: #F59BAD;
     cursor: pointer;
     border: none;
